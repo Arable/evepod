@@ -109,15 +109,8 @@ data_schema = {
 user_schema = {
 	# Schema definition, based on Cerberus grammar. Check the Cerberus project
 	# (https://github.com/nicolaiarocci/cerberus) for details.
-	'u' : { # username
-		'type' : 'string',
-		'required' : True,
-		'unique' : True,
-	},
-	'p' : { # Plaintext. We're awful
-		'type':'string',
-		'required': True, 	
-	},
+	# Only keys are stored on evepod. All user information is stored on stormpath
+	'keys': {'type': 'list','items':[{'type':'string'}]},
 }
 
 pod_schema = { 
@@ -146,6 +139,11 @@ pod_schema = {
 	'sn':{ # Serial Number (does not need to be unique, since one SN can be many pods!
 		'type':'string',
 	},
+	'mac':{ # MAC address of cellular radio
+		'type':'string', # Need to define a MAC address type
+		'unique':True,
+		'required':True,
+	}
 }
 
 sensor_schema = { 
