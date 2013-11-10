@@ -11,7 +11,7 @@ def before_insert_data(documents):
 def deploy_new_pod(request, payload):
 	for d in documents:
 		print "DEPLOYING a new POD, " + d["urlid"] + " !"
-		g = app.data.find_one(gateways,{"urlid":"robogateway"})
+		# g = app.data.find_one(gateways,{"urlid":"robogateway"})
 		print json.dumps(g)
 		
 def deploy_new_gateway(request, payload):

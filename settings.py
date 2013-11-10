@@ -22,13 +22,12 @@ if os.environ.get('PORT'):
 	MONGO_DBNAME = os.getenv('MONGO_DBNAME')
 	SERVER_NAME = os.getenv('SERVER_NAME')
 else:
-	# Run locally, because my internet at home stinks
+	# Run locally, using a different port than the local gateway app
 	MONGO_HOST = 'localhost'
 	MONGO_PORT = 27017
 	MONGO_DBNAME = 'evepod'
-	SERVER_NAME = '0.0.0.0:5000'
+	SERVER_NAME = '0.0.0.0:3000'
 	
-
 
 # Enable reads (GET), inserts (POST) and DELETE for resources/collections
 # (if you omit this line, the API will default to ['GET'] and provide
@@ -265,7 +264,6 @@ datasets = {
 }
 
 data = {
-
 	# most global settings can be overridden at resource level
 	'resource_methods': ['GET', 'POST', 'DELETE'],
 	'schema': data_schema	
@@ -279,10 +277,7 @@ users = {
 	# '/<item_title>/<ObjectId>/'. We leave it untouched, and we also enable an
 	# additional read-only entry point. This way consumers can also perform
 	# GET requests at '/<item_title>/<username>/'.
-	'additional_lookup': {
-		'url': '[\w]+',
-		'field': 'u'
-	},
+
 	# We choose to override global cache-control directives for this resource.
 	'cache_control': '',
 	'cache_expires': 0,
