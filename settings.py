@@ -27,7 +27,6 @@ else:
 	MONGO_PORT = 27017
 	MONGO_DBNAME = 'evepod'
 	SERVER_NAME = '0.0.0.0:3000'
-	
 
 # Enable reads (GET), inserts (POST) and DELETE for resources/collections
 # (if you omit this line, the API will default to ['GET'] and provide
@@ -64,27 +63,13 @@ gateway_schema = {
 	'pods' : {'type':'list','items':[{
 											'type':'objectid',
 											'data_relation': {
-												'collection':'pods',
+												'resource':'pods',
 												'field':'_id',
 												'embeddable':True
 												}
 											},
 											]
 				},
-}
-
-dataset_schema = {
-	# Schema definition, based on Cerberus grammar. Check the Cerberus project
-	# (https://github.com/nicolaiarocci/cerberus) for details.
-	'urlid' : { # Dataset url name
-		'type': 'string',
-		'minlength': 1,
-		'maxlength': 10,
-		'required': True,
-		'unique': True,
-	},
-	'users': {'type':'list','items':[{'type':'string'}]}, # Should be embeddable
-	'pods': {'type':'list','items':[{'type':'string'}]},  # Should be embeddable
 }
 
 data_schema = {
@@ -94,7 +79,15 @@ data_schema = {
 	't':{'type':'datetime','required':True},   # datetime 
 	'v':{'type':'float','required':True},      # value
 	'p':{'type':'string','required':True},     # pod
-	's':{'type':'string','required':True},     # sensor
+	's':{'type':'string','required':True},     # sensor id (SID)
+	'pod':{
+			'type':'objectid',
+			'data_relation': {
+					'resource' :'sensors',
+					'field': '_id',
+					'embeddable':True,
+				},
+			},
 	'sensor':{
 			'type':'objectid',
 			'data_relation': {
@@ -122,26 +115,23 @@ pod_schema = {
 		'maxlength': 20,
 		'required': True,
 	},
-	'id' : { # Pod ID number (usually SIM number)
-		'type': 'string',
-		'minlength': 7,
-		'maxlength': 27,
-		'required': True,
-		'unique': True,
-	},
-	'ds' : { # dataset (should be embeddable?)
+	'pid' : { # Pod ID (usually phone number)
 		'type':'string',
+		'minlength':10,
+		'maxlength':15,
+		'required':True,
 	},
-	'g' : { # Gateway (should be embeddable?)
-		'type':'string',
-	},
-	'sn':{ # Serial Number (does not need to be unique, since one SN can be many pods!
-		'type':'string',
-	},
-	'mac':{ # MAC address of cellular radio
+	'imei':{ # MIEI address of cellular radio, acts as Serial Number
 		'type':'string', # Need to define a MAC address type
 		'unique':True,
 		'required':True,
+		'minlength':16,
+		'maxlength':16,
+	},
+	'firmware':{
+		'type':'integer',
+		'minlength':1,
+		'maxlength':1,
 	}
 }
 
@@ -242,30 +232,9 @@ pods = {
 	'schema': pod_schema
 }
 
-datasets = {
-	# 'title' tag used in item links. Defaults to the resource title minus
-	# the final, plural 's' (works fine in most cases but not for 'people')
-	# 'item_title': 'f',
-	# by default the standard item entry point is defined as
-	# '/<item_title>/<ObjectId>/'. We leave it untouched, and we also enable an
-	# additional read-only entry point. This way consumers can also perform
-	# GET requests at '/<item_title>/<urlname>/'.
-	'additional_lookup': {
-		'url': '[\w]+',
-		'field': 'urlid'
-	},
-	# We choose to override global cache-control directives for this resource.
-	'cache_control': 'max-age=10,must-revalidate',
-	'cache_expires': 10,
-	
-	# most global settings can be overridden at resource level
-	'resource_methods': ['GET', 'POST', 'DELETE'],
-	'schema': dataset_schema
-}
-
 data = {
 	# most global settings can be overridden at resource level
-	'resource_methods': ['GET', 'POST', 'DELETE'],
+	'resource_methods': ['GET', 'POST'],
 	'schema': data_schema	
 }
 
@@ -345,7 +314,6 @@ DOMAIN = {
         'gateways':gateways,
 		'pods': pods,
 		'users':users,
-		'datasets':datasets,
 		'sensors':sensors,
 		'data':data,
 }
