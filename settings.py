@@ -83,7 +83,7 @@ data_schema = {
 	'pod':{
 			'type':'objectid',
 			'data_relation': {
-					'resource' :'sensors',
+					'resource' :'pods',
 					'field': '_id',
 					'embeddable':True,
 				},
