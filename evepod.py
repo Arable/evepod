@@ -8,13 +8,11 @@ def before_insert_data(documents):
 	for d in documents:
 		print "Posting " + d["s"] + " data from " + d["p"] + " to the database"
 		
-def deploy_new_pod(request, payload):
+def deploy_new_pod(documents):
 	for d in documents:
 		print "DEPLOYING a new POD, " + d["urlid"] + " !"
-		# g = app.data.find_one(gateways,{"urlid":"robogateway"})
-		print json.dumps(g)
 		
-def deploy_new_gateway(request, payload):
+def deploy_new_gateway(documents):
 	for d in documents:
 		print "DEPLOYING a new GATEWAY, " + d["urlid"] + " !"
 
