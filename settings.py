@@ -227,7 +227,7 @@ pods = {
 	'cache_control': 'max-age=10,must-revalidate',
 	'cache_expires': 10,
 	# most global settings can be overridden at resource level
-	'resource_methods': ['GET', 'POST', 'DELETE'],
+	'resource_methods': ['GET', 'POST'],
 	'item_methods': ['GET','PATCH'],
 	'schema': pod_schema
 }
@@ -299,7 +299,7 @@ sensors = {
 	'cache_expires': 10,
 	
 	# most global settings can be overridden at resource level
-	'resource_methods': ['GET', 'POST', 'DELETE'],
+	'resource_methods': ['GET', 'POST'],
 	'schema': sensor_schema
 }
 #------------------------------------------------------------------------------
