@@ -227,8 +227,8 @@ pods = {
 	'cache_control': 'max-age=10,must-revalidate',
 	'cache_expires': 10,
 	# most global settings can be overridden at resource level
-	'resource_methods': ['GET', 'POST', 'DELETE'],
-	'item_methods': ['GET','PATCH'],
+	'resource_methods': ['GET', 'PATCH', 'POST', 'DELETE'],
+	'item_methods': ['GET','PATCH', 'POST'],
 	'schema': pod_schema
 }
 
