@@ -60,16 +60,16 @@ gateway_schema = {
 		'required': True,
 		'unique': True,
 	},
-	'pods' : {'type':'list','items':[{
-											'type':'objectid',
-											'data_relation': {
-												'resource':'pods',
-												'field':'_id',
-												'embeddable':True
-												}
-											},
-											]
-				},
+	'pods' : {
+		'type':'list','items':[{
+			'type':'objectid',
+			'data_relation': {
+				'resource':'pods',
+				'field':'_id',
+				'embeddable':True
+			}
+		},]
+	},
 }
 
 data_schema = {
@@ -81,21 +81,21 @@ data_schema = {
 	'p':{'type':'string','required':True},     # pod
 	's':{'type':'string','required':True},     # sensor id (SID)
 	'pod':{
-			'type':'objectid',
-			'data_relation': {
-					'resource' :'pods',
-					'field': '_id',
-					'embeddable':True,
-				},
-			},
+		'type':'objectid',
+		'data_relation': {
+			'resource' :'pods',
+			'field': '_id',
+			'embeddable':True,
+		},
+	},
 	'sensor':{
-			'type':'objectid',
-			'data_relation': {
-                     'resource': 'sensors',
-                     'field': '_id',
-                     'embeddable': True
-                 },
-			}
+		'type':'objectid',
+		'data_relation': {
+			'resource': 'sensors',
+			'field': '_id',
+			'embeddable': True
+		},
+	}
 }
 
 user_schema = {
@@ -125,8 +125,8 @@ pod_schema = {
 		'type':'string', # Need to define a MAC address type
 		'unique':True,
 		'required':True,
-		'minlength':16,
-		'maxlength':16,
+		'minlength':15,
+		'maxlength':15,
 	},
 	'firmware':{
 		'type':'integer',
@@ -180,26 +180,26 @@ sensor_schema = {
 	
 	# Sensor info: A text string that provides summary info for each sensor
 	'info' : {
-			'type':'string',
-			'required':False,
-			'minlength':1,
-			'maxlength':256,
-			'default':'no additional information is available for this sensor',
+		'type':'string',
+		'required':False,
+		'minlength':1,
+		'maxlength':256,
+		'default':'no additional information is available for this sensor',
 	},
 
 	# Magnitude: A multiplier for sensor values
 	'magnitude' : {
-			'type':'float',
-			'required':False,
-			'maxlength':100,
-			'default':1.0,
+		'type':'float',
+		'required':False,
+		'maxlength':100,
+		'default':1.0,
 	},
 	
 	# Units: A text string that identifies the units for sensor values
 	'units' : {
-			'type':'string',
-			'required':False,
-			'maxlength':100,
+		'type':'string',
+		'required':False,
+		'maxlength':100,
 	},	
 	
 }
