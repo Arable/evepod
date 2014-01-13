@@ -1,4 +1,4 @@
-Eve==0.2-dev
+Eve==0.2
 Cerberus==0.4.0
 Events==0.2.0
 Flask==0.10.1
