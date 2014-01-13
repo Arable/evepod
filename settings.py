@@ -126,7 +126,7 @@ pod_schema = {
 		'unique':True,
 		'required':True,
 		'minlength':15,
-		'maxlength':15,
+		'maxlength':20,
 	},
 	'firmware':{
 		'type':'integer',
