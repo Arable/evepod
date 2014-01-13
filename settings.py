@@ -199,7 +199,7 @@ pods = {
 	# additional read-only entry point. This way consumers can also perform
 	# GET requests at '/<item_title>/<urlname>/'.
 	'additional_lookup': {
-		'url': '[\w]+',
+		'url' : 'regex("[\w]+")',
 		'field': 'urlid'
 	},
 	# We choose to override global cache-control directives for this resource.
@@ -249,7 +249,7 @@ sensors = {
 	# additional read-only entry point. This way consumers can also perform
 	# GET requests at '/<item_title>/<lastname>/'.
 	'additional_lookup': {
-		'url': '[\w]+',
+		'url' : 'regex("[\w]+")',
 		'field': 'urlid'
 	},
 	# We choose to override global cache-control directives for this resource.
