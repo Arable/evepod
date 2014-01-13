@@ -1,4 +1,4 @@
-git+https://github.com/nicolaiarocci/eve.git@develop
+Eve==0.2-dev
 Cerberus==0.4.0
 Events==0.2.0
 Flask==0.10.1
