@@ -50,27 +50,6 @@ ITEM_METHODS = ['GET', 'PATCH', 'DELETE']
 #			allsensorinfo, allpoddata, allfarmerdata, farmers 
 #
 #------------------------------------------------------------------------------
-gateway_schema = {
-	# Schema definition, based on Cerberus grammar. Check the Cerberus project
-	# (https://github.com/nicolaiarocci/cerberus) for details.
-	'urlid' : {
-		'type': 'string',
-		'minlength': 1,
-		'maxlength': 10,
-		'required': True,
-		'unique': True,
-	},
-	'pods' : {
-		'type':'list','items':[{
-			'type':'objectid',
-			'data_relation': {
-				'resource':'pods',
-				'field':'_id',
-				'embeddable':True
-			}
-		},]
-	},
-}
 
 data_schema = {
 	# Schema definition, based on Cerberus grammar. Check the Cerberus project
@@ -261,27 +240,6 @@ users = {
 	'schema': user_schema
 }
 
-gateways = {
-	# 'title' tag used in item links. Defaults to the resource title minus
-	# the final, plural 's' (works fine in most cases but not for 'people')
-	# 'item_title': 'f',
-	# by default the standard item entry point is defined as
-	# '/<item_title>/<ObjectId>/'. We leave it untouched, and we also enable an
-	# additional read-only entry point. This way consumers can also perform
-	# GET requests at '/<item_title>/<lastname>/'.
-	'additional_lookup': {
-		'url': '[\w]+',
-		'field': 'urlid'
-	},
-	# We choose to override global cache-control directives for this resource.
-	'cache_control': 'max-age=10,must-revalidate',
-	'cache_expires': 10,
-	
-	# most global settings can be overridden at resource level
-	'resource_methods': ['GET', 'POST', 'DELETE'],
-	'schema': gateway_schema
-}
-
 sensors = {
 	# 'title' tag used in item links. Defaults to the resource title minus
 	# the final, plural 's' (works fine in most cases but not for 'people')
@@ -311,8 +269,7 @@ sensors = {
 #------------------------------------------------------------------------------
 
 DOMAIN = {
-        'gateways':gateways,
-		'pods': pods,
+    	'pods': pods,
 		'users':users,
 		'sensors':sensors,
 		'data':data,
