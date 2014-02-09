@@ -1,1 +1,1 @@
-web: python evepod.py
+web: NEW_RELIC_CONFIG_FILE=newrelic.ini newrelic-admin python evepod.py
