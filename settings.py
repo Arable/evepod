@@ -79,7 +79,7 @@ data_schema = {
 
 user_schema = {
 	# Schema definition, based on Cerberus grammar. Check the Cerberus project
-	# (https://github.com/nicolaiarocci/cerberus) for details.
+	# (https://github.com/nicolaiarocci/cerberus) for detailsself.
 	# Only keys are stored on evepod. All user information is stored on stormpath
 	'keys': {'type': 'list','items':[{'type':'string'}]},
 }
@@ -202,12 +202,19 @@ pods = {
 		'url' : 'regex("[\w]+")',
 		'field': 'urlid'
 	},
+
 	# We choose to override global cache-control directives for this resource.
 	'cache_control': 'max-age=10,must-revalidate',
 	'cache_expires': 10,
+
 	# most global settings can be overridden at resource level
 	'resource_methods': ['GET', 'POST'],
 	'item_methods': ['GET','PATCH'],
+
+	# Public read-only access:
+	'public_methods': ['GET'],
+    'public_item_methods': ['GET'],
+
 	'schema': pod_schema
 }
 
@@ -229,12 +236,15 @@ users = {
 	# We choose to override global cache-control directives for this resource.
 	'cache_control': '',
 	'cache_expires': 0,
-	
+		
+	# Resource security:
+	# No public methods on users
+	'public_methods': [],
+    'public_item_methods': [],
+
 	# Only allow superusers and admin
 	# 'allowed_roles': ['superuser', 'admin'],
-	
-	# Allow 'token' to be returned with POST responses (MUST USE SSL!)
-	# 'extra_response_fields': ['token'],
+
 	# most global settings can be overridden at resource level
 	'resource_methods': ['GET', 'POST', 'DELETE'],	
 	'schema': user_schema
@@ -256,6 +266,10 @@ sensors = {
 	'cache_control': 'max-age=10,must-revalidate',
 	'cache_expires': 10,
 	
+	# Public read-only access:
+	'public_methods': ['GET'],
+    'public_item_methods': ['GET'],
+    
 	# most global settings can be overridden at resource level
 	'resource_methods': ['GET', 'POST'],
 	'schema': sensor_schema
