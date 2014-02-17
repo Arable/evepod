@@ -220,11 +220,11 @@ pods = {
 		'field': 'urlid'
 	},
 
-	'datasource': {
-        'projection': {	'owner': 0,
-        				'firmware': 0,
-        			},
-     },
+#	'datasource': {
+#        'projection': {	'owner': 0,
+#        				'firmware': 0,
+#        			},
+#     },
 
 	# We choose to override global cache-control directives for this resource.
 	'cache_control': 'max-age=10,must-revalidate',
@@ -262,7 +262,7 @@ users = {
 		
 	# Resource security:
 	# No public methods on users
-#	 'public_methods': [],
+#	 #'public_methods': [],
 #    'public_item_methods': [],
 
 	# Only allow superusers and admin
