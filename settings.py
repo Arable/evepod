@@ -35,7 +35,7 @@ RESOURCE_METHODS = ['GET', 'POST']
 
 # Enable reads (GET), edits (PATCH) and deletes of individual items
 # (defaults to read-only item access).
-ITEM_METHODS = ['GET', 'PATCH', 'DELETE']
+ITEM_METHODS = ['GET', 'PATCH']
 
 # Set the public methods for the read-only API. 
 # Only authorized users can write, edit and delete
@@ -118,11 +118,10 @@ pod_schema = {
 		'required':True,
 	},
 	'last': {
-		'type':'datetime'
+		'type':'datetime',
 	},
 	'owner': {
-		'type':'string'
-
+		'type':'string',
 	},
 	'public': {
 		'type':'boolean',
@@ -236,8 +235,8 @@ pods = {
 	'item_methods': ['GET','PATCH'],
 
 	# Public read-only access:
-	'public_methods': ['GET'],
-    'public_item_methods': ['GET'],
+#	'public_methods': ['GET'],
+#    'public_item_methods': ['GET'],
 
 	'schema': pod_schema
 }
@@ -263,8 +262,8 @@ users = {
 		
 	# Resource security:
 	# No public methods on users
-	'public_methods': [],
-    'public_item_methods': [],
+#	 'public_methods': [],
+#    'public_item_methods': [],
 
 	# Only allow superusers and admin
 	# 'allowed_roles': ['superuser', 'admin'],
@@ -291,8 +290,8 @@ sensors = {
 	'cache_expires': 10,
 	
 	# Public read-only access:
-	'public_methods': ['GET'],
-    'public_item_methods': ['GET'],
+#	'public_methods': ['GET'],
+#    'public_item_methods': ['GET'],
 
 	# most global settings can be overridden at resource level
 	'resource_methods': ['GET', 'POST'],
