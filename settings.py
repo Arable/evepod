@@ -225,7 +225,7 @@ pods = {
         'projection': {	'owner': 0,
         				'firmware': 0,
         			},
-     }
+     },
 
 	# We choose to override global cache-control directives for this resource.
 	'cache_control': 'max-age=10,must-revalidate',
