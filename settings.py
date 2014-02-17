@@ -31,7 +31,7 @@ else:
 # Enable reads (GET), inserts (POST) and DELETE for resources/collections
 # (if you omit this line, the API will default to ['GET'] and provide
 # read-only access to the endpoint).
-RESOURCE_METHODS = ['GET', 'POST', 'DELETE']
+RESOURCE_METHODS = ['GET', 'POST']
 
 # Enable reads (GET), edits (PATCH) and deletes of individual items
 # (defaults to read-only item access).
@@ -111,7 +111,25 @@ pod_schema = {
 		'type':'integer',
 		'minlength':1,
 		'maxlength':1,
-	}
+	},
+	'status': {
+		'type': 'string',
+		'allowed': ['dead','deployed','provisioned','active','unknown'],
+		'required':True,
+	},
+	'last': {
+		'type':'datetime'
+	},
+	'owner': {
+		'type':'string'
+
+	},
+	'public': {
+		'type':'boolean',
+		'required': True,
+		'default': True
+	},
+	
 }
 
 sensor_schema = { 
@@ -203,6 +221,12 @@ pods = {
 		'field': 'urlid'
 	},
 
+	'datasource': {
+        'projection': {	'owner': 0,
+        				'firmware': 0,
+        			},
+     }
+
 	# We choose to override global cache-control directives for this resource.
 	'cache_control': 'max-age=10,must-revalidate',
 	'cache_expires': 10,
@@ -269,7 +293,7 @@ sensors = {
 	# Public read-only access:
 	'public_methods': ['GET'],
     'public_item_methods': ['GET'],
-    
+
 	# most global settings can be overridden at resource level
 	'resource_methods': ['GET', 'POST'],
 	'schema': sensor_schema
