@@ -128,6 +128,11 @@ pod_schema = {
 		'required': True,
 		'default': True
 	},
+	'voltage':{
+		'type':'number',
+		'required':True,
+		'default':0
+	}
 	
 }
 
